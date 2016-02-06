@@ -8,11 +8,11 @@ module TinyPNG
     include HTTParty
     base_uri 'http://tinypng.org/api'
 
-    def initialize api_key=ENV['TINY_PNG_KEY']
+    def initialize(api_key=ENV['TINY_PNG_KEY'])
       @basic_auth = { username: 'api', password: api_key } if api_key
     end
 
-    def shrink image
+    def shrink(image)
       begin
         response = self.class.post('/shrink', body: image, basic_auth: @basic_auth).parsed_response
       rescue => e
